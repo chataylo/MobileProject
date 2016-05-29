@@ -6,12 +6,12 @@
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:cdv="http://cordova.apache.org/ns/1.0">
  
-    <name>My App</name>
+    <name>Map Visualizer</name>
     <description>
-        My first Tabris.js app
+        A Differential Map Visualizer
     </description>
-    <author email="me@me.com" href="http://www.me.me">
-        Me
+    <author email="taylorachris@gmail.com">
+        Chataylo
     </author>
  
     <access origin="*" />

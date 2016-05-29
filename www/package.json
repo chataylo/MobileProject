@@ -3,6 +3,6 @@
   "description": "My first Tabris.js app",
   "main": "app.js",
   "dependencies": {
-    "tabris": "1.0"
+    "tabris": "latest"
   }
 }
