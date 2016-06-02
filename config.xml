@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget
-    id="my.first.app"
+    id="Differential Map"
     version="1.0.0"
     xmlns:gap="http://phonegap.com/ns/1.0"
     xmlns="http://www.w3.org/ns/widgets"
@@ -16,5 +16,13 @@
  
     <access origin="*" />
  
-    <preference name="EnableDeveloperConsole" value="true"/>
+    <preference name="EnableDeveloperConsole" value="false"/>
+    
+    <platform name="android">
+        <icon src="image.png" density="mdpi" />
+        <icon src="image.png" density="hdpi" />
+        <icon src="image.png" density="xhdpi" />
+        <icon src="image.png" density="xxhdpi" />
+        <icon src="image.png" density="xxxhdpi" />
+    </platform>
 </widget>
