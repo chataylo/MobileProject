@@ -12,7 +12,7 @@ Array.prototype.remove = function() {
 //////////////////
 
 var page = tabris.create("Page", {
-  title: "Differential Mapping",
+  title: "Comprehension - Differential Mapping - Color",
   topLevel: true
 });
 
@@ -40,7 +40,8 @@ var distribute = function(vector, amount){
         if(vector[i] == 1){
            newVec.push(1);
            continue;
-        }if(vector[i] == 0){
+        }
+        if(vector[i] == 0){
            newVec.push(0);
            continue;
         }
@@ -153,7 +154,7 @@ DifferentialMap = function(rows, columns, vectorLength, nodeModel, nodeView, nod
            var nonMaxes = getNonMaxed(decValue);
            var distribution = rowDifferenceDiff/nonMaxes;
            var decValue = distribute(decValue, distribution);
-           this.insertRowComponent(decValue, decRow, closestNode.col, (1 - ((chosenRow - decRow))/this.rows)/3);
+           this.insertRowComponent(decValue, decRow, closestNode.col, (1 - ((chosenRow - decRow))/this.rows)/5);
         }
       
       
@@ -167,7 +168,7 @@ DifferentialMap = function(rows, columns, vectorLength, nodeModel, nodeView, nod
            var nonMaxes = getNonMaxed(incValue);
            var distribution = rowDifferenceDiff/nonMaxes;
            var incValue = distribute(incValue, distribution);
-           this.insertRowComponent(incValue, incRow, closestNode.col, (1 - ((incRow - chosenRow))/this.rows)/3);
+           this.insertRowComponent(incValue, incRow, closestNode.col, (1 - ((incRow - chosenRow))/this.rows)/5);
         }
       
       
@@ -180,14 +181,14 @@ DifferentialMap = function(rows, columns, vectorLength, nodeModel, nodeView, nod
             var nCol = col+i;
             if(nCol >= this.columns)
                 nCol = nCol % this.columns;
-            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i));
+            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i/2));
         }
       
         for(var i = 1 ; i < Math.round(this.columns/3); i++){
             nCol = col - i;
             if(nCol < 0)
               nCol = this.columns - (-nCol);
-            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i));
+            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i/2));
       
         }
     }
@@ -513,6 +514,17 @@ Thousand.on("select", function() {
  
 page.open();
 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
       
       
