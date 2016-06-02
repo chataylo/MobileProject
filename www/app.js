@@ -12,7 +12,7 @@ Array.prototype.remove = function() {
 //////////////////
 
 var page = tabris.create("Page", {
-  title: "Hello, World!",
+  title: "Comprehension - Differential Mapping - Colors",
   topLevel: true
 });
 
