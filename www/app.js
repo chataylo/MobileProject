@@ -180,14 +180,14 @@ DifferentialMap = function(rows, columns, vectorLength, nodeModel, nodeView, nod
             var nCol = col+i;
             if(nCol >= this.columns)
                 nCol = nCol % this.columns;
-            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i*2));
+            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i));
         }
       
         for(var i = 1 ; i < Math.round(this.columns/3); i++){
             nCol = col - i;
             if(nCol < 0)
               nCol = this.columns - (-nCol);
-            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i*2));
+            this.nodes[row][nCol].controller.pullData(newVec, startweight/(i));
       
         }
     }
@@ -305,7 +305,7 @@ BaseNodeController = function(){
             this.model.data[i] += difference;
           
         }
-        this.parent.weight += (0.1 * pullDegree);
+        this.parent.weight += (0.2 * pullDegree);
     }.bind(this);
 
 }
@@ -415,10 +415,10 @@ ColorNodeController = function(){
 ///// initialize instance ////////////////////
 
 
-var config = {
+var colorConfig = {
 
     rows: 49,
-    columns: 35,
+    columns: 36,
     vectorLength: 3,
 
     nodeModel: ColorNodeModel,
@@ -426,63 +426,98 @@ var config = {
     nodeController: ColorNodeController
 };
 
-var myMap = buildMap(config);
+var myMap = buildMap(colorConfig);
 
 
 ///// set up UI ////////////////////
 
 
-var start = new tabris.Button({
+var All = new tabris.Button({
   left: 0, top: 490,
+  text: "All"
+}).appendTo(page);
+
+var Blue = new tabris.Button({
+  left: 75, top: 490,
+  text: "Blue"
+}).appendTo(page);
+
+var Start = new tabris.Button({
+  left: 150, top: 490,
   text: "Start"
 }).appendTo(page);
 
-var stop = new tabris.Button({
-  left: 100, top: 490,
+var Stop = new tabris.Button({
+  left: 225, top: 490,
   text: "Stop"
 }).appendTo(page);
 
-var start2 = new tabris.Button({
-  left: 200, top: 490,
-  text: "Start"
+var Thousand = new tabris.Button({
+  left: 300, top: 490,
+  text: "1000"
 }).appendTo(page);
 
 var interval;
 
+
+var updateRainbow = function(){
+   var input = [];
+   input.push(Math.random());
+   input.push(Math.random());
+   input.push(Math.random());
+  
+   myMap.update(input);
+}
+
+var updateBlue = function(){
+   var input = [];
+   input.push(0);
+   input.push(0);
+   input.push(Math.random());
+  
+   myMap.update(input);
+}
+
+var chosenUpdate = updateRainbow;
+
 // Change the text view's text when the button is pressed
-start.on("select", function() {
-    
+Start.on("select", function() {
     interval = setInterval(function(){
-       var input = [];
-       input.push(Math.random());
-       input.push(Math.random());
-       input.push(Math.random());
-  
-       myMap.update(input);
+       chosenUpdate();
        myMap.draw();
-    }, 5);
-   
+    }, 5);  
 });
-
-start2.on("select", function() {
-    
-    interval = setInterval(function(){
-       var input = [];
-       input.push(0);
-       input.push(0);
-       input.push(Math.random());
   
-       myMap.update(input);
-       myMap.draw();
-    }, 5);
-   
-});
-
-stop.on("select", function() {
-    
+Stop.on("select", function() {
     clearInterval(interval);
-   
 });
+
+All.on("select", function() { 
+    chosenUpdate = updateRainbow;
+});
+
+Blue.on("select", function() {
+    
+    chosenUpdate = updateBlue;
+});
+
+Thousand.on("select", function() {
+    for(var i = 0 ; i < 1000; i++){
+       chosenUpdate();
+    }
+    myMap.draw();
+});
+
+
 
  
 page.open();
+
+      
+      
+      
+      
+      
+      
+      
+      
